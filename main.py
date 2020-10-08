@@ -1,22 +1,36 @@
 import shutil
 import os
-
+import os
+from string import digits
+import subprocess
+import PyPDF2 
+import textract
+import warnings
+from tqdm import tqdm
 from Orgenise import *
+from settings import *
 from Image_pre_processing import *
-from TAGS import *
+import TAGS
+import settings
 from INFO import *
+from __main__ import *
 
-print("organise")
+
+
+init2()
+
+
+#print("organise")
 Orgenise()
 
-print("image pre processing")
+#print("image pre processing")
 
 Image_pre_processing()
 
+#print("generating tags")
 
-print("generating tags")
+Make_tags()
 
-#TAGS()
-#print("collecting info")
+print("collecting info")
 
 INFO()
