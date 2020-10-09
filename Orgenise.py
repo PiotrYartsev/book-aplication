@@ -28,75 +28,38 @@ def Orgenise():
         n=TAGS.files_system[o][0]
         m=TAGS.files_system[o][1]
         k=TAGS.files_system[o][2]
-    
+        a=k.split(".")[0]
+
         if k=="VIDEO" or k=="AUDIO":
              pass
-        else:
-             for a in os.listdir("/home/piotr/Desktop/Books/{}/{}/{}".format(n,m,k)):
-                 if a=="Books to read.docx" or a=="desktop.ini" or a==".gitignore" or a=="INFO.txt":
-                     pass
-                 elif a=="PDF":
-
-                      for l in os.listdir("/home/piotr/Desktop/Books/{}/{}/{}/{}".format(n,m,k,a)):  
-                          if l=="Books to read.docx" or l=="desktop.ini" or l==".gitignore" or l=="INFO.txt":
-                                  pass
-                          elif os.path.exists("/home/piotr/Desktop/Books/{}/{}/{}/{}/PDF.pdf".format(n,m,k,a)):
-                              pass
-                              
-                          else:
-                              os.rename("/home/piotr/Desktop/Books/{}/{}/{}/{}/{}".format(n,m,k,a,l),"/home/piotr/Desktop/Books/{}/{}/{}/{}/PDF.pdf".format(n,m,k,a))
-                 elif a=="IMAGE":
-
-                      for l in os.listdir("/home/piotr/Desktop/Books/{}/{}/{}/{}".format(n,m,k,a)):  
-                          if l=="Books to read.docx" or l=="desktop.ini" or l==".gitignore" or l=="INFO.txt":
-                                  pass
-                          elif os.path.exists("/home/piotr/Desktop/Books/{}/{}/{}/{}/IMAGE.jpg".format(n,m,k,a)):
-                              pass
-                              
-                          else:
-                              os.rename("/home/piotr/Desktop/Books/{}/{}/{}/{}/{}".format(n,m,k,a,l),"/home/piotr/Desktop/Books/{}/{}/{}/{}/IMAGE.jpg".format(n,m,k,a))
-                 if a=="EXTRA":
-                    pass
-                 else:
-                    if ".pdf" in a:
-
-                         if not os.path.exists("/home/piotr/Desktop/Books/{}/{}/{}/PDF".format(n,m,k)):
-                             os.makedirs("/home/piotr/Desktop/Books/{}/{}/{}/PDF".format(n,m,k))
-                             shutil.move("/home/piotr/Desktop/Books/{}/{}/{}/{}".format(n,m,k,a), "/home/piotr/Desktop/Books/{}/{}/{}/PDF".format(n,m,k))
-                         else:
-                             if os.path.exists("/home/piotr/Desktop/Books/{}/{}/{}/PDF/{}".format(n,m,k,a)):
-                                 pass
-                             else:
-                                 shutil.move("/home/piotr/Desktop/Books/{}/{}/{}/{}".format(n,m,k,a), "/home/piotr/Desktop/Books/{}/{}/{}/PDF".format(n,m,k))
-                    elif a.endswith(".PNG")  or a.endswith(".jpg") or a.endswith(".jpeg"):
-
-                         if os.path.exists("/home/piotr/Desktop/Books/{}/{}/{}/{}".format(n,m,k,a)):
-                             os.replace("/home/piotr/Desktop/Books/{}/{}/{}/{}".format(n,m,k,a),"/home/piotr/Desktop/Books/{}/{}/{}/{}".format(n,m,k,a))
-    
-                         if not os.path.exists("/home/piotr/Desktop/Books/{}/{}/{}/IMAGE".format(n,m,k)):
-                             os.makedirs("/home/piotr/Desktop/Books/{}/{}/{}/IMAGE".format(n,m,k))
-                             shutil.move("/home/piotr/Desktop/Books/{}/{}/{}/{}".format(n,m,k,a), "/home/piotr/Desktop/Books/{}/{}/{}/IMAGE".format(n,m,k))
-                         else:
-                             if os.path.exists("/home/piotr/Desktop/Books/{}/{}/{}/IMAGE/{}".format(n,m,k,a)):
-                                 pass
-                             else:
-                                 shutil.move("/home/piotr/Desktop/Books/{}/{}/{}/{}".format(n,m,k,a), "/home/piotr/Desktop/Books/{}/{}/{}/IMAGE".format(n,m,k))
-                                 
-                         if a=="PDF" or a=="IMAGE" or a=="EXTRA" or a=="TAGS":
-                             pass
-                         else:
-                             print("{} moved to EXTRA".format(a))
-                             
-                             if not os.path.exists("/home/piotr/Desktop/Books/{}/{}/{}/EXTRA".format(n,m,k)):
-                                 os.makedirs("/home/piotr/Desktop/Books/{}/{}/{}/EXTRA".format(n,m,k))
-                                 shutil.move("/home/piotr/Desktop/Books/{}/{}/{}/{}".format(n,m,k,a), "/home/piotr/Desktop/Books/{}/{}/{}/EXTRA".format(n,m,k))
-                             else:
-                                  if os.path.exists("/home/piotr/Desktop/Books/{}/{}/{}/EXTRA/{}".format(n,m,k,a)):
-                                      print("""
-                                           {} went wrong 
-                                           """.format(a))
-                                  else:
-                                     shutil.move("/home/piotr/Desktop/Books/{}/{}/{}/{}".format(n,m,k,a), "/home/piotr/Desktop/Books/{}/{}/{}/EXTRA".format(n,m,k))
-                     
-                        
-                    
+        elif ".pdf" in k:
+            if not os.path.exists("/home/piotr/Desktop/Books/{}/{}/{}/".format(n,m,a)):
+                os.makedirs("/home/piotr/Desktop/Books/{}/{}/{}".format(n,m,a))
+                if ".pdf" in k:
+                      if not os.path.exists("/home/piotr/Desktop/Books/{}/{}/{}/PDF".format(n,m,a)):
+                          os.makedirs("/home/piotr/Desktop/Books/{}/{}/{}/PDF".format(n,m,a))
+                      
+                      shutil.move("/home/piotr/Desktop/Books/{}/{}/{}".format(n,m,k), "/home/piotr/Desktop/Books/{}/{}/{}/PDF".format(n,m,a))
+                      os.rename("/home/piotr/Desktop/Books/{}/{}/{}/PDF/{}".format(n,m,a,k),"/home/piotr/Desktop/Books/{}/{}/{}/PDF/PDF.pdf".format(n,m,a))
+                elif "." in k:
+                      if not os.path.exists("/home/piotr/Desktop/Books/{}/{}/{}/EXTRA".format(n,m,a)):
+                          os.makedirs("/home/piotr/Desktop/Books/{}/{}/{}/EXTRA".format(n,m,a))
+                      
+                      shutil.move("/home/piotr/Desktop/Books/{}/{}/{}".format(n,m,k), "/home/piotr/Desktop/Books/{}/{}/{}/EXTRA".format(n,m,a))
+                else:
+                      pass
+                  
+            elif os.path.exists("/home/piotr/Desktop/Books/{}/{}/{}/".format(n,m,a)):
+                      if ".pdf" in k:
+                          if not os.path.exists("/home/piotr/Desktop/Books/{}/{}/{}/PDF".format(n,m,a)):
+                              os.makedirs("/home/piotr/Desktop/Books/{}/{}/{}/PDF".format(n,m,a))
+                          
+                          shutil.move("/home/piotr/Desktop/Books/{}/{}/{}".format(n,m,k), "/home/piotr/Desktop/Books/{}/{}/{}/PDF".format(n,m,a))
+                          os.rename("/home/piotr/Desktop/Books/{}/{}/{}/PDF/{}".format(n,m,a,k),"/home/piotr/Desktop/Books/{}/{}/{}/PDF/PDF.pdf".format(n,m,a))
+                      elif "." in k:
+                          if not os.path.exists("/home/piotr/Desktop/Books/{}/{}/{}/EXTRA".format(n,m,a)):
+                              os.makedirs("/home/piotr/Desktop/Books/{}/{}/{}/EXTRA".format(n,m,a))
+                         
+                          shutil.move("/home/piotr/Desktop/Books/{}/{}/{}".format(n,m,k), "/home/piotr/Desktop/Books/{}/{}/{}/EXTRA".format(n,m,a))
+                      else:
+                          pass

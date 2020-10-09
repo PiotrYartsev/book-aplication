@@ -25,7 +25,6 @@ warnings.filterwarnings("ignore")
 
 
 def parse_all_files():
-
     global files_system
     files_system=[] 
     for categories in os.listdir("/home/piotr/Desktop/Books"):
@@ -41,44 +40,55 @@ def parse_all_files():
                                 if books=="Books to read.docx" or books=="desktop.ini" or books==".gitignore" or books=="VIDEO" or books=="AUDIO":
                                     pass
                                 else:
-                                    if os.path.exists("/home/piotr/Desktop/Books/{}/{}/{}/PDF/PDF.pdf".format(categories,packages,books))==True:
+                                    if os.path.exists("/home/piotr/Desktop/Books/{}/{}/{}/PDF/PDF.pdf".format(categories,packages,books)):
                                         g=[]
                                         g.append(categories)
                                         g.append(packages)
                                         g.append(books)
                                         files_system.append(g)
+                                    elif os.path.exists("/home/piotr/Desktop/Books/{}/{}/{}".format(categories,packages,books)): 
+                                        g=[]
+                                        g.append(categories)
+                                        g.append(packages)
+                                        g.append(books)
+                                        files_system.append(g)
+                                        
                        except NotADirectoryError:
                                   print("""
 /home/piotr/Desktop/Books/{}/{}/{}/PDF/PDF.pdf ffile not found""".format(categories,packages,books))
 
 
 def parse_some_files(path_to_book_folder):
+    global files_system
+    
+    files_system=[]
     for w in path_to_book_folder:
-        global files_system
-        files_system=[]
-        try:
-            os.path.exists("{}".format((w)))==True
-            for books in tqdm(os.listdir("{}".format((w)))):
+
+
+
+        stuff=str(w)
+        #print(stuff)
+        stuff=stuff.replace("/home/piotr/Desktop/Books/","")
+        #print(stuff)
+        list_stuff=stuff.split('/')
+        #print(list_stuff)
+        files_system.append([list_stuff[0],list_stuff[1],list_stuff[2]])
+        
+
     
-                if books=="Books to read.docx" or books=="desktop.ini" or books==".gitignore" or books=="VIDEO" or books=="AUDIO":
-                    pass
-                else:
-                    stuff=str(w)
-                    stuff.replace("/home/piotr/Desktop/Books/","")
-                    list_stuff=stuff.split("/")
-                    files_system.append(list_stuff[0],list_stuff[1],list_stuff[2])
-                            
-            #print("The path to the books is stored in the list files_system")
-    
-        except:
-            "This path to boos does not exist."   
-                                
+
+    #print(files_system)
+                    
+
+
+             
 def Make_tags():
  
-    for o in tqdm(range(len(files_system)), ascii=True, desc="Open pdf"):
+    for o in tqdm(range(len(files_system)), ascii=True, desc="Make tags"):
         n=files_system[o][0]
         m=files_system[o][1]
         k=files_system[o][2]
+        #print(k)
         while True:
 
                 try:
@@ -128,6 +138,8 @@ def Make_tags():
 /home/piotr/Desktop/Books/{}/{}/{}/PDF/PDF.pdf  decode error""".format(n,m,k))
                     if os.path.exists("/home/piotr/Desktop/Books/{}/{}/{}/TAGS/TAGS.txt".format(n,m,k)):
                             os.remove("/home/piotr/Desktop/Books/{}/{}/{}/TAGS/TAGS.txt".format(n,m,k))
+                    if not os.path.exists("/home/piotr/Desktop/Books/{}/{}/{}/TAGS".format(n,m,k)):
+                            os.makedirs("/home/piotr/Desktop/Books/{}/{}/{}/TAGS".format(n,m,k))
         
                     f = open("/home/piotr/Desktop/Books/{}/{}/{}/TAGS/TAGS.txt".format(n,m,k),'w')
                     if m=="ALL":
@@ -175,6 +187,8 @@ def Make_tags():
         
         if os.path.exists("/home/piotr/Desktop/Books/{}/{}/{}/TAGS/TAGS.txt".format(n,m,k)):
                 os.remove("/home/piotr/Desktop/Books/{}/{}/{}/TAGS/TAGS.txt".format(n,m,k))
+        if not os.path.exists("/home/piotr/Desktop/Books/{}/{}/{}/TAGS".format(n,m,k)):
+                            os.makedirs("/home/piotr/Desktop/Books/{}/{}/{}/TAGS".format(n,m,k))     
 
         f = open("/home/piotr/Desktop/Books/{}/{}/{}/TAGS/TAGS.txt".format(n,m,k),'w')
         if m=="ALL":
