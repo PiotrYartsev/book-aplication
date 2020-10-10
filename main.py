@@ -20,17 +20,10 @@ import time
 
 init2()
 
-#print("organise")
 Orgenise()
-
-#print("image pre processing")
 
 Image_pre_processing()
 
-#print("generating tags")
-
 Make_tags()
-
-print("collecting info")
 
 INFO()

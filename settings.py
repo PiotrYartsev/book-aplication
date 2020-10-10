@@ -17,6 +17,7 @@ from settings import *
 from Image_pre_processing import *
 import TAGS
 import settings
+import sys
 from INFO import *
 from __main__ import *
 
@@ -49,10 +50,13 @@ def init2():
         if len(check_these_books)>0:
             TAGS.files_system=None
             parse_some_files(check_these_books)
-#            for r in check_these_books:
-#                print(r)
-#                print("\n")
+            for r in check_these_books:
+                print(r)
+                print("\n")
             #print(TAGS.files_system)
+        else:
+            TAGS.files_system=None
+            sys.exit("Nothing new!")
     else:
         print("\n not a valid input \n")
     

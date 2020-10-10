@@ -34,17 +34,21 @@ def Image_pre_processing():
          if k=="VIDEO" or k=="AUDIO":
              pass
          else:
+             if not "IMAGE" in os.listdir("/home/piotr/Desktop/Books/{}/{}/{}".format(n,m,k)):
+                 os.makedirs("/home/piotr/Desktop/Books/{}/{}/{}/IMAGE".format(n,m,k))
              for a in os.listdir("/home/piotr/Desktop/Books/{}/{}/{}".format(n,m,k)):
                  if a=="Books to read.docx" or a=="desktop.ini" or a==".gitignore":
                      pass
 
                  elif a=="IMAGE":
+                      #print(o)
                       if os.path.exists("/home/piotr/Desktop/Books/{}/{}/{}/{}/IMAGE.jpg".format(n,m,k,a)):
                                   os.remove("/home/piotr/Desktop/Books/{}/{}/{}/{}/IMAGE.jpg".format(n,m,k,a)) 
                       if os.path.exists("/home/piotr/Desktop/Books/{}/{}/{}/{}/IMAGE.png".format(n,m,k,a)):
                                   os.remove("/home/piotr/Desktop/Books/{}/{}/{}/{}/IMAGE.png".format(n,m,k,a)) 
                       if os.path.exists("/home/piotr/Desktop/Books/{}/{}/{}/{}/IMAGE_RE.jpg".format(n,m,k,a)):
-                                  os.remove("/home/piotr/Desktop/Books/{}/{}/{}/{}/IMAGE_RE.jpg".format(n,m,k,a))                    
+                                  os.remove("/home/piotr/Desktop/Books/{}/{}/{}/{}/IMAGE_RE.jpg".format(n,m,k,a))
+
                       if len(os.listdir("/home/piotr/Desktop/Books/{}/{}/{}/{}".format(n,m,k,a))) == 0:
                           #print("no image, made from pdf")
                           try:                                             
@@ -66,6 +70,6 @@ def Image_pre_processing():
                                   image_rgb = image.convert('RGB')
 
                                       
-                                  image_rgb.save("/home/piotr/Desktop/Books/{}/{}/{}/{}/IMAGE_RE.jpg".format(n,m,k,a),quality=5, optimize=True)
+                                  image_rgb.save("/home/piotr/Desktop/Books/{}/{}/{}/{}/IMAGE_RE.jpg".format(n,m,k,a),quality=5, optimize=True, dpi=72)
      if len(books_could_not_convert):                  
          print("\n {} \n".format(books_could_not_convert))
