@@ -1,4 +1,4 @@
-#!/usr/bin/env python3
+#! /bin/python3
 # -*- coding: utf-8 -*-
 
 # settings.py
@@ -56,7 +56,7 @@ def init2():
             #print(TAGS.files_system)
         else:
             TAGS.files_system=None
-            sys.exit("Nothing new!")
+            sys.exit("\nNothing new!")
     else:
         print("\n not a valid input \n")
     
